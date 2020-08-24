@@ -15,5 +15,6 @@ namespace PostCodeLookUpAPI.DAL
         { }
 
         public DbSet<DeliveryOptions> DeliveryOptions { get; set; }
+        public DbSet<UserData> UserData { get; set; }
     }
 }
