@@ -11,9 +11,10 @@ Set up Code first migration:
 
 1) The data store used is SQL DB-> Change the connectionstring in appconfiguration to your Db instance name 
 2) Add migration using powershell(Package manager command) commands
-       Add-Migration InitialCreate
-	   Update-Database
-	   remove-migration
+
+       a) Add-Migration InitialCreate
+       b)  Update-Database
+       c)  remove-migration
 	   
 3)The above migration is created for PostcodeDB with Schema using entity framework code first
 4) The Database will be seeded with given deleivery options first time
