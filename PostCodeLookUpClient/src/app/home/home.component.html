@@ -1,0 +1,15 @@
+<h1>Welcome To Postcode Lookup Tool!</h1>
+<div class="container">
+  
+    <form class="form-group" #f="ngForm" (ngSubmit)="onPostcodeSubmit(f)" novalidate>
+      <div>
+        <label for="inputPostcode" class="col-form-label">Enter Postcode</label>
+        <input class="col-sm-2 form-control"  name="inputPostcode" ngModel required #inputPostcode="ngModel" placeholder="Postcode">
+        <br />
+        <button type="submit" class="btn btn-primary">Look up</button>
+      </div>
+    </form>
+    <div *ngIf="deliveryOptions">
+      <label for="inputPostcode" class="col-form-label">Delivery Option :{{deliveryOptions}}</label>
+    </div>
+</div>
