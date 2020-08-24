@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { Postcode } from './postcode';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -9,20 +11,31 @@ import { NgForm } from '@angular/forms';
 export class HomeComponent {
   public deliveryOptions: string;
   public inputPostcode: string;
-  public baseUrl :string = "https://localhost:44376/";
+  public inputPostcodeError: string;
+  submitted = false;
+  model: any = {};
+  url:string;
 
   constructor(private http: HttpClient){
-     //@Inject('BASE_URL') 
-    // private baseUrl: string) {
 
+  }  
+  clearOptions(){
+    this.submitted = false; 
+    this.deliveryOptions = "";
   }
-  public onPostcodeSubmit(f: NgForm) {
-  
-    this.http.get<string>(this.baseUrl + "postcodelookup/" + f.value.inputPostcode)
+  onSubmit() { 
+    this.submitted = true;     
+   this.deliveryOptions = "";
+   this.inputPostcodeError="";
+
+    this.url = environment.baseUrl + "postcodelookup/" + this.model.postcode;
+    this.http.get<string>(this.url)
     .subscribe(result => {
       this.deliveryOptions = result;
     }),
      error => console.error(error) 
+
   }
+  
 
 }

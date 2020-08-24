@@ -1,15 +1,32 @@
-<h1>Welcome To Postcode Lookup Tool!</h1>
-<div class="container">
-  
-    <form class="form-group" #f="ngForm" (ngSubmit)="onPostcodeSubmit(f)" novalidate>
-      <div>
-        <label for="inputPostcode" class="col-form-label">Enter Postcode</label>
-        <input class="col-sm-2 form-control"  name="inputPostcode" ngModel required #inputPostcode="ngModel" placeholder="Postcode">
-        <br />
-        <button type="submit" class="btn btn-primary">Look up</button>
-      </div>
-    </form>
-    <div *ngIf="deliveryOptions">
-      <label for="inputPostcode" class="col-form-label">Delivery Option :{{deliveryOptions}}</label>
-    </div>
+<div class="card m-3">
+  <h5 class="card-header">Angular Postcode Look Up Tool</h5>
+  <div class="card-body">
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <div class="form-row">
+              <div class="form-group col-5">
+                  <label>Enter Post Code </label>
+
+                  <input type="text" name="postcode" class="form-control" 
+                  [(ngModel)]="model.postcode" #postcode="ngModel" 
+                  [ngClass]="{ 'is-invalid': f.submitted && postcode.invalid }"
+                   required minlength="2" maxlength="8" (ngModelChange)="clearOptions()">
+
+                  <div *ngIf="f.submitted && postcode.invalid" class="invalid-feedback">
+                      <div *ngIf="postcode.errors.required">Postcode is required</div>
+                  </div>
+                  <div *ngIf="postcode.invalid" class="invalid-feedback">
+                    <div *ngIf="postcode.errors.minlength">Postcode must be atleast 2 characters</div>
+                </div>
+                <div *ngIf="postcode.invalid" class="invalid-feedback">
+                  <div *ngIf="postcode.errors.maxLength">Postcode can not be more than 8 characters</div>
+              </div>
+              </div>
+          </div>          
+          <button class="btn btn-primary mr-1">Search</button>
+          <div *ngIf="deliveryOptions">
+            <label  strong class="col-form-label">Delivery Option :{{deliveryOptions}}</label>
+          </div>
+      </form>
+      
+  </div>
 </div>
